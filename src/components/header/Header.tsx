@@ -4,14 +4,24 @@
  * @Author: 吴毛三
  * @Date: 2022-03-27 02:24:39
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-03-27 02:30:28
+ * @LastEditTime: 2022-04-18 23:54:50
  */
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/logo.svg";
 import styles from "./Header.module.css";
 import { Layout, Typography, Input, Menu, Button, Dropdown } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
+import {
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 const Header: React.FC = () => {
+  const history = useHistory();
+  const location = useLocation();
+  const params = useParams();
+  const match = useRouteMatch();
   return (
     <div>
       <div className={styles["app-header"]}>
@@ -31,16 +41,18 @@ const Header: React.FC = () => {
               语言
             </Dropdown.Button>
             <Button.Group className={styles["button-group"]}>
-              <Button>注册</Button>
-              <Button>登录</Button>
+              <Button onClick={() => history.push("/register")}>注册</Button>
+              <Button onClick={() => history.push("/signIn")}>登录</Button>
             </Button.Group>
           </div>
         </div>
         <Layout.Header className={styles["main-header"]}>
           <img src={logo} alt="" className={styles["App-logo"]} />
-          <Typography.Title level={3} className={styles.title}>
-            React 旅游网
-          </Typography.Title>
+          <span onClick={() => history.push("/")}>
+            <Typography.Title level={3} className={styles.title}>
+              React 旅游网
+            </Typography.Title>
+          </span>
           <Input.Search
             className={styles["search-input"]}
             placeholder="请输入旅游目的地、主题或关键字"

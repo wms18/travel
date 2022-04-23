@@ -4,12 +4,12 @@
  * @Author: 吴毛三
  * @Date: 2022-04-10 22:36:27
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-04-10 23:05:56
+ * @LastEditTime: 2022-04-20 10:59:10
  */
 import React from "react";
 import { Row, Col, Typography } from "antd";
 import styles from "./HomePage.module.css";
-import Header from "../../components/header/Header";
+import Header from "../../components/header/Header.class";
 import Footer from "../../components/footer/Footer";
 import SideMenu from "../../components/sideMenu";
 import Carousel from "../../components/carousel";

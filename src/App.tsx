@@ -11,7 +11,6 @@ import styles from "./App.module.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { SignIn, RegisterPage, DetailPage } from "./pages";
 import HomePage from "./pages/home";
-
 function App() {
   return (
     <div className={styles.App}>

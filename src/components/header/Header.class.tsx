@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-04-20 09:45:04
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-04-24 00:03:59
+ * @LastEditTime: 2022-05-04 00:20:26
  */
 import React, { useEffect } from "react";
 import logo from "../../assets/logo.svg";
@@ -23,7 +23,31 @@ class Header extends React.Component<RouteComponentProps, State> {
       language: storeState.language,
       languageList: storeState.languageList,
     };
+    store.subscribe(this.handleStoreChange);
   }
+  handleStoreChange = () => {
+    const storeState = store.getState();
+    this.setState({
+      language: storeState.language,
+      languageList: storeState.languageList,
+    });
+  };
+  menuClickHandle = (e) => {
+    if (e.key === "new") {
+      const action = {
+        type: "ADD_LANGUAGE",
+        payload: { code: "new_lang", name: "新语言" },
+      };
+      store.dispatch(action);
+    } else {
+      const action = {
+        type: "CHANGE_LANGUAGE",
+        payload: e.key,
+      };
+      store.dispatch(action);
+    }
+  };
+
   render() {
     const { history } = this.props;
     const { language, languageList } = this.state;
@@ -36,10 +60,11 @@ class Header extends React.Component<RouteComponentProps, State> {
               <Dropdown.Button
                 style={{ marginLeft: 15 }}
                 overlay={
-                  <Menu>
+                  <Menu onClick={this.menuClickHandle}>
                     {languageList.map((item: any) => {
                       return <Menu.Item key={item.code}>{item.name}</Menu.Item>;
                     })}
+                    <Menu.Item key={"new"}>添加新语言</Menu.Item>
                   </Menu>
                 }
                 icon={<GlobalOutlined></GlobalOutlined>}

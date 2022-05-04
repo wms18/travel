@@ -4,10 +4,11 @@
  * @Author: 吴毛三
  * @Date: 2022-04-10 22:36:27
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-04-20 10:59:10
+ * @LastEditTime: 2022-05-04 00:59:49
  */
 import React from "react";
 import { Row, Col, Typography } from "antd";
+import { useTranslation } from "react-i18next";
 import styles from "./HomePage.module.css";
 import Header from "../../components/header/Header.class";
 import Footer from "../../components/footer/Footer";
@@ -19,7 +20,8 @@ import sideImage2 from "../../assets/images/sider_2019_02-04.png";
 import sideImage3 from "../../assets/images/sider_2019_02-04-2.png";
 import ProductCollection from "../../components/productCollection";
 import BusinessPartner from "../../components/businessPartner";
-const HomePage: React.FC = () => {
+const HomePage: React.FC = (props) => {
+  const { t } = useTranslation();
   return (
     <div>
       <Header></Header>
@@ -35,7 +37,7 @@ const HomePage: React.FC = () => {
         <ProductCollection
           title={
             <Typography.Title level={3} type="warning">
-              爆款推荐
+              {t("home_page.hot_recommended")}
             </Typography.Title>
           }
           sideImage={sideImage2}
@@ -44,7 +46,7 @@ const HomePage: React.FC = () => {
         <ProductCollection
           title={
             <Typography.Title level={3} type="danger">
-              新品上市
+              {t("home_page.new_arrival")}
             </Typography.Title>
           }
           sideImage={sideImage3}
@@ -53,7 +55,7 @@ const HomePage: React.FC = () => {
         <ProductCollection
           title={
             <Typography.Title level={3} type="success">
-              国内游推荐
+              {t("home_page.domestic_travel")}
             </Typography.Title>
           }
           sideImage={sideImage}
@@ -62,7 +64,7 @@ const HomePage: React.FC = () => {
         <BusinessPartner
           title={
             <Typography.Title level={3} type="success">
-              合作企业
+              {t("home_page.joint_venture")}
             </Typography.Title>
           }
         ></BusinessPartner>

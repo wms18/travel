@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-03-27 02:24:39
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-05 00:26:25
+ * @LastEditTime: 2022-05-09 00:43:24
  */
 import React, { useEffect } from "react";
 import logo from "../../assets/logo.svg";
@@ -29,8 +29,8 @@ const Header: React.FC = (props) => {
   const location = useLocation();
   const params = useParams();
   const match = useRouteMatch();
-  const language = useSelector((state) => state.language);
-  const languageList = useSelector((state) => state.languageList);
+  const language = useSelector((state) => state.language.language);
+  const languageList = useSelector((state) => state.language.languageList);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const menuClickHandle = (e) => {

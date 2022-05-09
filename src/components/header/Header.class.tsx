@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-04-20 09:45:04
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-04 18:47:18
+ * @LastEditTime: 2022-05-09 00:43:56
  */
 import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
@@ -22,8 +22,8 @@ import {
 import { Dispatch } from "redux";
 const mapStateToProps = (state: RootState) => {
   return {
-    language: state.language,
-    languageList: state.languageList,
+    language: state.language.language,
+    languageList: state.language.languageList,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch) => {

@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-03-23 22:48:13
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-04 18:19:47
+ * @LastEditTime: 2022-05-07 15:35:16
  */
 import React from "react";
 import ReactDOM from "react-dom";
@@ -16,6 +16,9 @@ import { ConfigProvider } from "antd";
 import "./i18n/configs";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import axios from "axios";
+axios.defaults.headers["x-icode"] = "JFC30932E499FCD5B";
+
 ReactDOM.render(
   <ConfigProvider locale={zhCN}>
     <Provider store={store}>

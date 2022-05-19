@@ -1,6 +1,15 @@
 {
   "compilerOptions": {
     "noImplicitAny": false,
+    "baseUrl": "./",
+    "paths": { // define paths mappings
+      "@/*": [
+        "src/*"
+      ], // will enable -> import { ... } from '@
+      "components/*": [
+        "src/components/*"
+      ], // will enable -> import { ... } from 'components/
+    },
     "target": "es5",
     "lib": [
       "dom",

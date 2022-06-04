@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-05-15 02:06:53
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-20 01:24:51
+ * @LastEditTime: 2022-05-22 02:36:49
  */
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -22,15 +22,28 @@ const initialState: ProductSearchState = {
 };
 export const searchProduct = createAsyncThunk(
   "productSearch/searchProduct",
-  async (touristRouteId: string, thunkAPI) => {
-    const { data } = await axios.get(
-      `http://123.56.149.216:8080/api/touristRoutes/${touristRouteId}`
-    );
-    return data;
+  async (
+    paramaters: {
+      keywords: string;
+      nextPage: number | string;
+      pageSize: number | string;
+    },
+    thunkAPI
+  ) => {
+    let url = `http://123.56.149.216:8080/api/touristRoutes?pageNumber=${paramaters.nextPage}&pageSize=${paramaters.pageSize}`;
+    if (paramaters.keywords) {
+      url += `&keyword=${paramaters.keywords}`;
+    }
+    const response = await axios.get(url);
+    return {
+      data: response.data,
+      pagination: JSON.parse(response.headers["x-pagination"]),
+    };
   }
 );
+
 export const productSearchSlice = createSlice({
-  name: "productDetail",
+  name: "productSearch",
   initialState,
   reducers: {},
   extraReducers: {

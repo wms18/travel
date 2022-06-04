@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-04-10 22:36:27
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-10 01:03:51
+ * @LastEditTime: 2022-05-23 00:30:03
  */
 import React, { Component } from "react";
 import { Row, Col, Typography, Spin } from "antd";
@@ -24,7 +24,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
 import { giveMeDataActionCreator } from "../../redux/recommendProducts/recommendProductsAction";
-
+import { MainLayout } from "@/layouts/mainLayout/MainLayout";
 const mapStateToProps = (state: RootState) => {
   return {
     loading: state.recommendProducts.loading,
@@ -66,10 +66,8 @@ class HomePage extends Component<PropsType> {
       return <div>网站出错：{error}</div>;
     }
     return (
-      <>
-        <Header />
+      <MainLayout>
         {/* 页面内容 content */}
-        <div className={styles["page-content"]}>
           <Row style={{ marginTop: 20 }}>
             <Col span={6}>
               <SideMenu />
@@ -112,9 +110,7 @@ class HomePage extends Component<PropsType> {
               </Typography.Title>
             }
           />
-        </div>
-        <Footer />
-      </>
+      </MainLayout>
     );
   }
 }

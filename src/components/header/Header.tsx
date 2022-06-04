@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-03-27 02:24:39
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-09 00:43:24
+ * @LastEditTime: 2022-05-23 00:11:35
  */
 import React, { useEffect } from "react";
 import logo from "../../assets/logo.svg";
@@ -82,6 +82,7 @@ const Header: React.FC = (props) => {
           <Input.Search
             className={styles["search-input"]}
             placeholder="请输入旅游目的地、主题或关键字"
+            onSearch={(value) => history.push(`/search/${value}`)}
           ></Input.Search>
         </Layout.Header>
         <Menu mode={"horizontal"} className={styles["main-menu"]}>

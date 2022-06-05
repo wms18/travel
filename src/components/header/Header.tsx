@@ -4,9 +4,9 @@
  * @Author: 吴毛三
  * @Date: 2022-03-27 02:24:39
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-05-23 00:11:35
+ * @LastEditTime: 2022-06-04 22:59:04
  */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.svg";
 import styles from "./Header.module.css";
 import { Layout, Typography, Input, Menu, Button, Dropdown } from "antd";
@@ -24,6 +24,11 @@ import {
   changeLanguageActionCreator,
   addLanguageActionCreator,
 } from "../../redux/language/languageActions";
+import jwt_decode, { JwtPayload as DefaultJwtPayload } from "jwt-decode";
+import { userSlice } from "@/redux/user/slice";
+interface JwtPayload extends DefaultJwtPayload {
+  username: string;
+}
 const Header: React.FC = (props) => {
   const history = useHistory();
   const location = useLocation();
@@ -33,12 +38,25 @@ const Header: React.FC = (props) => {
   const languageList = useSelector((state) => state.language.languageList);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const jwt = useSelector((s) => s.user.token);
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    if (jwt) {
+      const token = jwt_decode<JwtPayload>(jwt);
+      setUsername(token.username);
+    }
+  }, [jwt]);
   const menuClickHandle = (e) => {
     if (e.key === "new") {
       dispatch(addLanguageActionCreator("新语言", "new"));
     } else {
       dispatch(changeLanguageActionCreator(e.key));
     }
+  };
+  const onLogout = () => {
+    dispatch(userSlice.actions.logOut());
+    history.push("/");
+    window.location.reload();
   };
   return (
     <div>
@@ -62,14 +80,25 @@ const Header: React.FC = (props) => {
             >
               {language === "en" ? "English" : "中文"}
             </Dropdown.Button>
-            <Button.Group className={styles["button-group"]}>
-              <Button onClick={() => history.push("/register")}>
-                {t("header.register")}
-              </Button>
-              <Button onClick={() => history.push("/signIn")}>
-                {t("header.signin")}
-              </Button>
-            </Button.Group>
+            {jwt ? (
+              <Button.Group className={styles["button-group"]}>
+                <span>
+                  {t("header.welcome")}
+                  <Typography.Text strong>{username}</Typography.Text>
+                </span>
+                <Button>{t("header.shoppingCart")}</Button>
+                <Button onClick={onLogout}>{t("header.signOut")}</Button>
+              </Button.Group>
+            ) : (
+              <Button.Group className={styles["button-group"]}>
+                <Button onClick={() => history.push("/register")}>
+                  {t("header.register")}
+                </Button>
+                <Button onClick={() => history.push("/signIn")}>
+                  {t("header.signin")}
+                </Button>
+              </Button.Group>
+            )}
           </div>
         </div>
         <Layout.Header className={styles["main-header"]}>

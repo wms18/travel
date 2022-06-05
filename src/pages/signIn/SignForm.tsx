@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-05-30 01:46:45
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-06-04 22:23:16
+ * @LastEditTime: 2022-06-05 19:42:47
  */
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
@@ -28,7 +28,6 @@ export const SignForm: React.FC = () => {
   }, [jwt]);
 
   const onFinish = async (values: any) => {
-    console.log("Success:", values);
     dispatch(signIn({ email: values.username, password: values.password }));
   };
 

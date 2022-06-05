@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-05-15 02:06:53
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-06-04 22:13:39
+ * @LastEditTime: 2022-06-04 22:54:41
  */
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -31,7 +31,13 @@ export const signIn = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      state.token = null;
+      state.error = null;
+      state.loading = false;
+    },
+  },
   extraReducers: {
     [signIn.pending.type]: (state) => {
       state.loading = true;

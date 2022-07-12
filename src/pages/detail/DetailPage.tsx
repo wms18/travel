@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-04-10 23:40:15
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-06-05 20:08:18
+ * @LastEditTime: 2022-06-05 22:21:46
  */
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps, useParams } from "react-router-dom";
@@ -21,6 +21,7 @@ import { getProductDetail } from "@/redux/productDetail/slice";
 import { useSelector } from "./../../redux/hooks";
 import { useDispatch } from "react-redux";
 import { MainLayout } from "@/layouts/mainLayout/MainLayout";
+import type { AnyAction } from "@reduxjs/toolkit";
 interface MatchProps {
   touristRouteId: string;
 }
@@ -35,9 +36,9 @@ export const DetailPage: React.FC<RouteComponentProps<MatchProps>> = (
   const product = useSelector((state) => state.productDetail.data);
   const error = useSelector((state) => state.productDetail.error);
   const { RangePicker } = DatePicker;
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProductDetail(touristRouteId));
+    dispatch(getProductDetail(touristRouteId) as unknown as AnyAction);
   }, []);
   if (loading) {
     return (

@@ -4,7 +4,7 @@
  * @Author: 吴毛三
  * @Date: 2022-03-27 02:24:39
  * @LastEditors: 吴毛三
- * @LastEditTime: 2022-06-04 22:59:04
+ * @LastEditTime: 2022-06-07 00:58:43
  */
 import React, { useEffect, useState } from "react";
 import logo from "../../assets/logo.svg";
@@ -86,7 +86,9 @@ const Header: React.FC = (props) => {
                   {t("header.welcome")}
                   <Typography.Text strong>{username}</Typography.Text>
                 </span>
-                <Button>{t("header.shoppingCart")}</Button>
+                <Button onClick={() => history.push("/shoppingCart")}>
+                  {t("header.shoppingCart")}
+                </Button>
                 <Button onClick={onLogout}>{t("header.signOut")}</Button>
               </Button.Group>
             ) : (

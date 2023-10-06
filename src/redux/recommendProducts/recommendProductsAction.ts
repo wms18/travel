@@ -13,7 +13,7 @@ import axios from "axios";
 export const FETCH_RECOMMEND_PRODUCTS_START = "FETCH_RECOMMEND_PRODUCTS_START"; // 正在调用推荐信息api
 export const FETCH_RECOMMEND_PRODUCTS_SUCCESS =
   "FETCH_RECOMMEND_PRODUCTS_SUCCESS"; // 获取推荐信息成功
-export const FETCH_RECOMMEND_PRODUCTS_FAIL = "FETCH_RECOMMEND_PRODUCTS_FAIL"; // 获取推荐信息失败
+export const  FETCH_RECOMMEND_PRODUCTS_FAIL = "FETCH_RECOMMEND_PRODUCTS_FAIL"; // 获取推荐信息失败
 interface FetchRecommendProductStartAction {
   type: typeof FETCH_RECOMMEND_PRODUCTS_START;
 }
